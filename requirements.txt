@@ -4,3 +4,6 @@ django-ckeditor
 django-crispy-forms
 django-dotenv
 django-environ
+django-filter
+django-formset-js
+django-import-export
