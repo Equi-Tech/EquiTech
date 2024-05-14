@@ -44,4 +44,4 @@ jobs:
         TIME_ZONE: Asia/Kolkata
         CACHE_KEY_PREFIX: Halo
       run: |
-        python ./web/manage.py test
+        python manage.py test
