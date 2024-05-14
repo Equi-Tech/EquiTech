@@ -73,4 +73,13 @@ def Dashboard(request):
         except:
             messages.warning(request, "You must complete KYC!")
             return redirect("account:kyc-reg")
-        
+        recent_transfer = Transaction.objects.filter(sender=request.user, transaction_type="transfer", status="completed").order_by("-id")[:1]
+        recent_recieved_transfer = Transaction.objects.filter(reciver=request.user, transaction_type="transfer").order_by("-id")[:1]
+
+        sender_transaction = Transaction.objects.filter(sender=request.user, transaction_type="transfer").order_by("-id")
+        reciever_transaction = Transaction.objects.filter(reciver=request.user, transaction_type="transfer").order_by("-id")
+
+        request_sender_transaction = Transaction.objects.filter(sender=request.user, transaction_type="request")
+        request_reciever_transaction = Transaction.objects.filter(reciver=request.user, transaction_type="request")
+        account = Account.objects.get(user=request.user)
+        credit_card = CreditCard.objects.filter(user=request.user).order_by("-id")
