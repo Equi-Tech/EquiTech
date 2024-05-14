@@ -66,3 +66,11 @@ def kyc_registration(request):
 
 
 def Dashboard(request):
+    user = request.user
+    if request.user.is_authenticated:
+        try:
+            kyc = KYC.objects.get(user = user)
+        except:
+            messages.warning(request, "You must complete KYC!")
+            return redirect("account:kyc-reg")
+        
