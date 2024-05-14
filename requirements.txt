@@ -1,0 +1,6 @@
+Django
+django-auto-logout
+django-ckeditor
+django-crispy-forms
+django-dotenv
+django-environ

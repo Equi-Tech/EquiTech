@@ -1,0 +1,33 @@
+name: Commitizen Commit Checker [Eshanized]
+
+on:
+    push:
+        branches: 
+            - master
+    pull_request:
+        branches:
+            - master
+
+jobs:
+    commitizen_check:
+        name: Checking Commitizen
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v2
+
+            - name: Install Node
+              uses: actions/setup-node@v3
+              with:
+                node-version: "18"
+            
+            - name: Install Commitizen
+              run: npm install -g commitizen
+
+            - name: Verify Commitizen
+              run: |
+                if git log --format='%s' ${{ github.event.number }}..${{ github.sha }} | grep -v '^(feat|fix|docs|style|refactor|pref|tets|chore|revert|WIP)(/(.+))?: .+'; then
+                    echo "Invalid Commit Message"
+                    exit 1
+                fi
