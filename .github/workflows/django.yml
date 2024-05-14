@@ -24,7 +24,15 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r ./web/requirements.txt
+        pip install Django
+        pip install django-auto-logout
+        pip install django-ckeditor
+        pip install django-crispy-forms
+        pip install django-dotenv
+        pip install django-environ
+        pip install django-filter
+        pip install django-formset-js
+        pip install django-import-export
     - name: Run Tests'
       env:
         SECRET_KEY: django-insecure-ba)uw(g6n!e@&+&y+nq4^xrsp@%pzg57hg209f!r3k0ir$c6+j
