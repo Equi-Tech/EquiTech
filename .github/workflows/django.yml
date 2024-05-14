@@ -44,4 +44,5 @@ jobs:
         TIME_ZONE: Asia/Kolkata
         CACHE_KEY_PREFIX: Halo
       run: |
+        cd equitech
         python manage.py test
