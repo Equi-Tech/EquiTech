@@ -10,6 +10,8 @@ from .models import Account
 from .models import KYC
 # Form for collecting KYC information
 from .forms import KYCForm
+from core.models import Transaction, CreditCard
+
 
 # Create your views here.
 # view for the account page
