@@ -1,3 +1,8 @@
+# Author            : Eshan Roy <eshan@snigdhaos.org>
+# Author URL        : https://eshanized.github.io
+
+# NOTE: Valid for windows
+
 # Function to check if Commitizen is installed
 function Check-Commitizen {
     if (-not (Get-Command commitizen-go -ErrorAction SilentlyContinue)) {

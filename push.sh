@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#
-#
+# Author            : Eshan Roy <eshan@snigdhaos.org>
+# Author URL        : https://eshanized.github.io
 
 check_commitizen() {
     if ! pacman -Qq commitizen-go &> /dev/null; then
