@@ -1,4 +1,4 @@
-Django
+django
 django-auto-logout
 django-ckeditor
 django-crispy-forms
@@ -7,3 +7,4 @@ django-environ
 django-filter
 django-formset-js
 django-import-export
+django-shortuuidfield
