@@ -116,4 +116,42 @@ def RequestFinalProcess(request, account_number, transaction_id):
     else:
         messages.warning(request, "Error Occured, Try Again Later!")
         return redirect("account:account")
-    
+
+
+def RequestCompleted(request, account_number, transaction_id):
+    try:
+        account = Account.objects.get(account_number=account_number)
+        transaction = Transaction.objects.get(transaction_id = transaction_id)
+    except:
+        messages.warning(request, "Request Doesnot exist")
+        return redirect('account:account')
+    context = {
+        'account': account,
+        'transaction': transaction,
+    }
+    return render(request, 'payment_request/request-completed.html', context)
+
+
+def settlement_confirmation(request, account_number, transaction_id):
+    try:
+        account = Account.objects.get(account_number=account_number)
+        transaction = Transaction.objects.get(transaction_id = transaction_id)
+    except:
+        messages.warning(request, "Request Doesnot exist")
+        return redirect('account:account')
+    context = {
+        'account': account,
+        'transaction': transaction,
+    }
+    return render(request, 'payment_request/settlement-confirmation.html', context)
+
+def settlement_processing(request, account_number, transaction_id):
+    account = Account.objects.get(account_number=account_number)
+    transaction = Transaction.objects.get(transaction_id = transaction_id)
+
+    sender = request.user
+    sender_account = request.user.account
+
+    if request.method == 'POST':
+        pin_number = request.POST.get('pin-number')
+        
