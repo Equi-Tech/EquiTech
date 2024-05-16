@@ -148,10 +148,49 @@ def settlement_confirmation(request, account_number, transaction_id):
 def settlement_processing(request, account_number, transaction_id):
     account = Account.objects.get(account_number=account_number)
     transaction = Transaction.objects.get(transaction_id = transaction_id)
-
     sender = request.user
     sender_account = request.user.account
-
     if request.method == 'POST':
         pin_number = request.POST.get('pin-number')
-        
+        pin_number = request.POST.get('pin-number')
+        if pin_number == sender_account.pin_number:
+            if sender_account.account_balance >=0 or sender_account.account_balance > transaction.amount:
+                sender_account.account_balance -= transaction.amount
+                sender_account.save()
+                account.account_balance += transaction.amount
+                account.save()
+                transaction.status = "request_settled"
+                transaction.save()
+                messages.success(request, f"settled to {account.user.kyc.full_name} was successfull.")
+                return redirect("core:settlement-completed",account.account_number, transaction.transaction_id)
+            else:
+                messages.warning(request, "Insufficient funds, fund your account and try again.")    
+        else:
+            messages.warning(request, "Incorrect Pin")
+            return redirect("core:settlement-confirmation", account.account_number, transaction.transaction_id)
+    else:
+        messages.warning(request, "Error Occured")
+        return redirect("account:dashboard")
+
+def SettlementCompleted(request ,account_number, transaction_id):
+    try:
+        account = Account.objects.get(account_number=account_number)
+        transaction = Transaction.objects.get(transaction_id=transaction_id)
+    except:
+        messages.warning(request, 'Request does not exists')
+        return redirect("account:account")
+    context = {
+        'account':account,
+        'transaction':transaction,
+        } 
+    return render(request, 'payment_request/settlement-completed.html', context)
+
+def delete_payment_request(request ,account_number, transaction_id):
+    account = Account.objects.get(account_number=account_number)
+    transaction = Transaction.objects.get(transaction_id=transaction_id)
+
+    if request.user == transaction.user:
+        transaction.delete()
+        messages.success(request, "Payment Request Deleted Sucessfully.")
+        return redirect("core:transaction-list")
+    
