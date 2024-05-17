@@ -10,11 +10,11 @@ app_name = 'core'
 urlpatterns = [
     path("", index, name='index'),
     path('search-account/', search_using_account, name='search-account'),
-    path('amount-transfare/<account_number>/',AmountTransfer , name='amount-transfare'),
-    path('amount-transfare-process/<account_number>/',AmountTransferProcess , name='amount-transfare-Process'),
-    path('transfare-confirm/<account_number>/<transaction_id>/',TransactionConfirmation , name='transfare-confirmation'),
-    path('transfare-process/<account_number>/<transaction_id>/',TransferProcess , name='transaction-process'),
-    path('transfare-completed/<account_number>/<transaction_id>/',TransferCompleted , name='transfar-completed'),
+    path('amount-transfer/<account_number>/',AmountTransfer , name='amount-transfer'),
+    path('amount-transfer-process/<account_number>/',AmountTransferProcess , name='amount-transfer-Process'),
+    path('transfer-confirm/<account_number>/<transaction_id>/',TransactionConfirmation , name='transfer-confirmation'),
+    path('transfer-process/<account_number>/<transaction_id>/',TransferProcess , name='transaction-process'),
+    path('transfer-completed/<account_number>/<transaction_id>/',TransferCompleted , name='transfar-completed'),
     #transaction
     path('transaction/',transaction_list, name='transaction-list' ),
     path('transaction/<transaction_id>',transaction_detail, name='transaction-detail' ),
