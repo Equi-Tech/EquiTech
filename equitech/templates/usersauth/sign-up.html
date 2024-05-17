@@ -15,32 +15,32 @@
                     </div>
                     <div class="col-xl-5">
                         <div class="section-text text-center">
-                            <h5 class="sub-title">Welcome to Paylio</h5>
-                            <h2 class="title">Sign In</h2>
-                            <p class="dont-acc">Don't have an account yet? <a href="{% url 'userauths:sign-up' %}">Sign Up</a></p>
+                            <h5 class="sub-title">Account</h5>
+                            <h2 class="title">Welcome to Paylio</h2>
+                            <p class="dont-acc">Already have an account? <a href="{% url 'usersauth:sign-in' %}">Login</a></p>
                             <!-- <div class="reg-google">
                                 <a href="javascript:void(0)"><i class="fab fa-google"></i>Sign up with Google</a>
                             </div>
                             <span class="or">Or Continue With</span> -->
                         </div>
-                        
-                        {% if messages %}
-                            {% for message in messages %}
-                                <strong>{{ message }}</strong>
-                            {% endfor %}
-                        {% endif %}
-                            
                         <form method="POST">
                             {% csrf_token %}
+
                             <div class="row">
                                 <div class="col-12">
                                     <div class="single-input">
-                                        <input type="text" required name="email" id="logemail" placeholder="Enter Your Email">
+                                        {{form.username}}
                                     </div>
                                     <div class="single-input">
-                                        <input type="password" required name="password" id="logemail" placeholder="Enter Your Password">
+                                        {{form.email}}
                                     </div>
-                                    <button class="cmn-btn w-100" type="submit">Login</button>
+                                    <div class="single-input">
+                                        {{form.password1}}
+                                    </div>
+                                    <div class="single-input">
+                                        {{form.password2}}
+                                    </div>
+                                    <button class="cmn-btn w-100" type="submit">Sign Up</button>
                                 </div>
                             </div>
                         </form>
