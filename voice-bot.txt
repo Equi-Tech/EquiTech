@@ -1,0 +1,1 @@
+https://github.com/Dostoyewski/django_voice_bot.git
