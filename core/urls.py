@@ -5,7 +5,7 @@ from .transaction import transaction_list, transaction_detail
 from .payment_request import SearchUserRequest, AmountRequest, AmountRequestProcess, RequestConfirmation, RequestCompleted, RequestFinialProcess, settlement_confirmation, settlement_processing, SettlementCompleted, delete_payment_request
 from .credit_card import credit_card_detail, fund_credit_card, withdraw_credit_card, delete_card
 # from core.views import dashboard
-import voice_bot
+# import voice_bot
 
 app_name = 'core'
 
